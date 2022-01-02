@@ -15,9 +15,13 @@ export default function loadData(dataRaw: any[]) {
 
   return {
     data,
-    levels: [...levels],
-    biomes: [...biomes],
-    zones: [...zones],
+    levels: [...levels].sort((a, b) => {
+      return a - b
+    }),
+    biomes: [...biomes].sort((a, b) => {
+      return a - b
+    }),
+    zones: [...zones].sort(),
     ids: [...ids],
   }
 }

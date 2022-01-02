@@ -1,5 +1,7 @@
 # Terraforms Explorer
 
+Demo [https://0xm3tatr0n.github.io/terraforms-explorer](https://0xm3tatr0n.github.io/terraforms-explorer)
+
 ## Running it locally
 
 Assuming you have node & npm installed:
@@ -21,6 +23,8 @@ Terraforms [Discord](https://discord.gg/PM4nRq4e)
 ## More on the underlying stack
 
 ### Three.js
+
+3D data rendering with Three.js.
 
 [Three.js Documentation](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
 
