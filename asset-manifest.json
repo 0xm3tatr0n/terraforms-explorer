@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/terraforms-explorer/static/css/main.76caff48.css",
+    "main.js": "/terraforms-explorer/static/js/main.cc71d2b9.js",
+    "static/js/787.6d45736f.chunk.js": "/terraforms-explorer/static/js/787.6d45736f.chunk.js",
+    "index.html": "/terraforms-explorer/index.html",
+    "main.76caff48.css.map": "/terraforms-explorer/static/css/main.76caff48.css.map",
+    "main.cc71d2b9.js.map": "/terraforms-explorer/static/js/main.cc71d2b9.js.map",
+    "787.6d45736f.chunk.js.map": "/terraforms-explorer/static/js/787.6d45736f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76caff48.css",
+    "static/js/main.cc71d2b9.js"
+  ]
+}
