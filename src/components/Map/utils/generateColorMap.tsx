@@ -6,6 +6,7 @@ export default function generateColorMap(
   idsAll: number[],
   parcels: number[],
   colorPallette: string[],
+  customParcels: number[],
 ) {
   const newColorMap: Record<string, string> = {}
   if (colorDimension === 'none') {
@@ -27,6 +28,20 @@ export default function generateColorMap(
   } else if (colorDimension === 'mine') {
     idsAll.forEach((e, i) => {
       newColorMap[String(e)] = parcels.includes(e) ? '#ff00ff' : '#FFFFFF' // '#ffff00'
+    })
+  } else if (colorDimension === 'custom') {
+    console.log('>> custom color scheme: ', customParcels)
+    idsAll.forEach((e, i) => {
+      if (customParcels.includes(Number(e))) {
+        console.log(
+          `>> i is ${i}: number: ${e}`,
+          customParcels.includes(Number(e)),
+          Number(e),
+        )
+      }
+      newColorMap[String(e)] = customParcels.includes(Number(e))
+        ? '#ff00ff'
+        : '#FFFFFF'
     })
   }
   return newColorMap

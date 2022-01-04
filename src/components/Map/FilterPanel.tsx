@@ -4,6 +4,7 @@ import { IFilterPanelProps, IDataFilters } from './interfaces'
 import ColorSelectRadioButtons from './ColorSelectRadioButtons'
 import BasicSelect from './BasicSelect'
 import FilterChips from './FilterChips'
+import CustomParcelFilter from './CustomParcelFilter'
 
 function FilterPanel(props: IFilterPanelProps) {
   const {
@@ -22,6 +23,7 @@ function FilterPanel(props: IFilterPanelProps) {
     spaceSliderHorizontal,
     spaceSlider,
     parcels,
+    setCustomParcels,
   } = props
 
   const { levelsFilter, biomesFilter, zonesFilter } = dataFilters
@@ -95,6 +97,11 @@ function FilterPanel(props: IFilterPanelProps) {
             dimension={colorDimension}
           />
         </Grid>
+        <CustomParcelFilter
+          setCustomParcels={setCustomParcels}
+          triggerVar={testState}
+          triggerFn={setTestState}
+        />
         <Grid item xs={12}>
           <i>Filters</i>
         </Grid>

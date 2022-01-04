@@ -17,6 +17,7 @@ function Render3D(props: IRender3DProps) {
     setCameraState,
     spaceSlider,
     spaceSliderHorizontal,
+    customParcels,
   } = props
 
   const mount = useRef<HTMLDivElement>(null)
@@ -107,6 +108,11 @@ function Render3D(props: IRender3DProps) {
             color: fallbackColor(colorMap[id]),
           })
           break
+        case 'custom':
+          materialColored = new THREE.MeshLambertMaterial({
+            color: fallbackColor(colorMap[id]),
+          })
+          break
         default:
           materialColored = new THREE.MeshLambertMaterial({
             color: '#ff00ff',
@@ -184,6 +190,7 @@ function Render3D(props: IRender3DProps) {
     spaceSlider,
     spaceSliderHorizontal,
     testState,
+    customParcels,
   ])
 
   return (

@@ -4,6 +4,10 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
+console.log = (...args) => {
+  // console.log(args)
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

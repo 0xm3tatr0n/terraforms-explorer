@@ -6,7 +6,6 @@ import {
   FormControlLabel,
   Radio,
 } from '@mui/material'
-import { pink } from '@mui/material/colors'
 
 import { IColorRadioProps } from './interfaces'
 
@@ -58,6 +57,11 @@ function ColorSelectRadioButtons(props: IColorRadioProps) {
           value="mine"
           control={<Radio sx={styleRadioButton} />}
           label="Mine"
+        />
+        <FormControlLabel
+          value="custom"
+          control={<Radio sx={styleRadioButton} />}
+          label="Custom"
         />
       </RadioGroup>
     </FormControl>
