@@ -46,6 +46,7 @@ export interface IFilterPanelProps {
   spaceSliderHorizontal: number
   setSpaceSliderHorizontal: any
   parcels: number[]
+  setCustomParcels: any
 }
 
 export interface IRender3DProps {
@@ -57,4 +58,5 @@ export interface IRender3DProps {
   colorMap: Record<string, string>
   spaceSlider: number
   spaceSliderHorizontal: number
+  customParcels: number[]
 }

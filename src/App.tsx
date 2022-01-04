@@ -119,22 +119,36 @@ function App() {
                 <Typography variant="h6">Map</Typography>
               </Link>
             </Box>
-            <Box className={'nav-block'}>
-              <a
-                href="https://twitter.com/0xm3tatr0n"
-                target="_blank"
-                style={{ textDecoration: 'none' }}
+            <Box className={'nav-block'} sx={{ float: 'right' }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  textDecoration: 'none',
+                  color: 'white',
+                }}
               >
-                <Typography
-                  variant="h5"
-                  sx={{
-                    textDecoration: 'none',
-                    color: 'white',
-                  }}
-                >
-                  <i style={{ textDecoration: 'none' }}>@0xm3tatr0n</i>
-                </Typography>
-              </a>
+                <i style={{ textDecoration: 'none', fontSize: '18px' }}>
+                  {' '}
+                  0xm3tatr0n{' '}
+                  <a
+                    href="https://twitter.com/0xm3tatr0n"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ textDecoration: 'underline', color: 'white' }}
+                  >
+                    twitter
+                  </a>{' '}
+                  |{' '}
+                  <a
+                    href="https://github.com/0xm3tatr0n"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ textDecoration: 'underline', color: 'white' }}
+                  >
+                    github
+                  </a>
+                </i>
+              </Typography>
             </Box>
           </Grid>
           {/* <Grid item xs={12}>

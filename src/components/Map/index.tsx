@@ -21,6 +21,7 @@ function Map(props: IMapProps) {
   const [levelsAll, setLevelsAll] = useState<number[]>([])
   const [zonesAll, setZonesAll] = useState<string[]>([])
   const [biomesAll, setBiomesAll] = useState<number[]>([])
+  const [customParcels, setCustomParcels] = useState<number[]>([])
   const [dataAll, setDataAll] = useState<any[]>([])
   const [dataFilters, setDataFilters] = useState<IDataFilters>({
     zonesFilter: [],
@@ -30,7 +31,7 @@ function Map(props: IMapProps) {
   const [dataToRender, setDataToRender] = useState<any[]>([])
   const [colorDimension, setColorDimension] = useState<string>('none')
   const [colorMap, setColorMap] = useState({} as Record<string, string>)
-  const [spaceSlider, setSpaceSlider] = useState<number>(2)
+  const [spaceSlider, setSpaceSlider] = useState<number>(3)
   const [spaceSliderHorizontal, setSpaceSliderHorizontal] = useState<number>(1)
   const [cameraState, setCameraState] = useState<number[]>([])
 
@@ -63,14 +64,19 @@ function Map(props: IMapProps) {
       idsAll,
       parcels,
       colorPallette,
+      customParcels,
     )
 
     setColorMap(newColorMap)
-  }, [colorDimension, levelsAll, biomesAll, zonesAll])
+  }, [colorDimension, levelsAll, biomesAll, zonesAll, customParcels])
 
   useEffect(() => {
     setParcels(userParcels)
   }, [userParcels])
+
+  useEffect(() => {
+    // console.log('>> custom parcels changed', customParcels)
+  }, [customParcels])
 
   return (
     <Grid item xs={12}>
@@ -91,6 +97,7 @@ function Map(props: IMapProps) {
           setSpaceSliderHorizontal={setSpaceSliderHorizontal}
           spaceSliderHorizontal={spaceSliderHorizontal}
           parcels={parcels}
+          setCustomParcels={setCustomParcels}
         />
         <Render3D
           dataToRender={dataToRender}
@@ -101,6 +108,7 @@ function Map(props: IMapProps) {
           colorMap={colorMap}
           spaceSlider={spaceSlider}
           spaceSliderHorizontal={spaceSliderHorizontal}
+          customParcels={customParcels}
         />
       </Grid>
     </Grid>

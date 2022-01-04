@@ -4,6 +4,7 @@ import { IFilterPanelProps, IDataFilters } from './interfaces'
 import ColorSelectRadioButtons from './ColorSelectRadioButtons'
 import BasicSelect from './BasicSelect'
 import FilterChips from './FilterChips'
+import CustomParcelFilter from './CustomParcelFilter'
 
 function FilterPanel(props: IFilterPanelProps) {
   const {
@@ -22,13 +23,14 @@ function FilterPanel(props: IFilterPanelProps) {
     spaceSliderHorizontal,
     spaceSlider,
     parcels,
+    setCustomParcels,
   } = props
 
   const { levelsFilter, biomesFilter, zonesFilter } = dataFilters
 
   const updateSpace = (event: Event, newValue: number | number[]) => {
     const space = Number(newValue)
-    if (space >= 0 && space <= 5) {
+    if (space >= 0 && space <= 10) {
       setSpaceSlider(space)
       setTestState(!testState)
     }
@@ -36,7 +38,7 @@ function FilterPanel(props: IFilterPanelProps) {
 
   const updateSpceHozriontal = (event: Event, newValue: number | number[]) => {
     const space = Number(newValue)
-    if (space >= 1 && space <= 10) {
+    if (space >= 0 && space <= 3) {
       setSpaceSliderHorizontal(space)
       setTestState(!testState)
     }
@@ -95,6 +97,11 @@ function FilterPanel(props: IFilterPanelProps) {
             dimension={colorDimension}
           />
         </Grid>
+        <CustomParcelFilter
+          setCustomParcels={setCustomParcels}
+          triggerVar={testState}
+          triggerFn={setTestState}
+        />
         <Grid item xs={12}>
           <i>Filters</i>
         </Grid>
@@ -151,10 +158,10 @@ function FilterPanel(props: IFilterPanelProps) {
               <Slider
                 aria-label="Level Spacing"
                 valueLabelDisplay="auto"
-                step={0.5}
+                step={1}
                 marks
                 min={0.5}
-                max={5}
+                max={10}
                 value={spaceSlider}
                 onChange={updateSpace}
                 color="secondary"
@@ -177,7 +184,7 @@ function FilterPanel(props: IFilterPanelProps) {
                 step={1}
                 marks
                 min={1}
-                max={5}
+                max={3}
                 value={spaceSliderHorizontal}
                 onChange={updateSpceHozriontal}
                 color="secondary"
