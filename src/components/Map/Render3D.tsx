@@ -125,7 +125,10 @@ function Render3D(props: IRender3DProps) {
       scene.add(plot)
     }
 
-    renderer.setClearColor('#000000')
+    // renderer.setClearColor('#000000')
+    renderer.setClearColor('#151515')
+
+    //#101010
     renderer.setSize(width, height)
 
     const handleResize = () => {
