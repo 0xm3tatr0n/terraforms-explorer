@@ -25,7 +25,7 @@ function BasicSelect(props: IBasicSelectProps) {
   const [selection, setSelection] = useState('all')
 
   useEffect(() => {
-    console.log('select filter change noticed ', filters, triggerVar)
+    // console.log('select filter change noticed ', filters, triggerVar)
     if (property === 'Zone') {
       if (filters.zonesFilter.length === 0) {
         setSelection('all')
@@ -88,14 +88,14 @@ function BasicSelect(props: IBasicSelectProps) {
           sx={{
             /* border: '1px solid white' */ color: 'magenta',
             '&& > fieldset': {
-              padding: '2px',
+              // padding: '2px',
               border: '1px solid magenta',
               borderRadius: '0px',
-              '&:hover': { border: '1px solid yellow' },
+              // '&:hover': { border: '1px solid yellow' },
             },
             '&& > .MuiSelect-select': {
               // border: '2px solid blue',
-              padding: '10px',
+              // padding: '10px',
             },
             'MuiOutlinedInput-root ': {
               color: 'white',
@@ -105,6 +105,7 @@ function BasicSelect(props: IBasicSelectProps) {
               color: 'magenta',
             },
           }}
+          size={'small'}
         >
           <MenuItem value={'all'}>all</MenuItem>
           {options.map((e) => {

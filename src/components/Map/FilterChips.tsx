@@ -19,14 +19,12 @@ function FilterChips(props: IChipsProps) {
   const { activeFilters, removeChip, triggerVar } = props
 
   const { levelsFilter, zonesFilter, biomesFilter } = activeFilters
-  console.log('active filters: ', activeFilters)
 
   const [chipsList, setChipsList] = useState([])
 
   const handleDelete = (dimension: string, value: string | number) => (
     e: Event,
   ) => {
-    console.log('delete', 'dimension: ', dimension, 'value', value)
     removeChip(dimension, value)
   }
 

@@ -75,7 +75,7 @@ function Map(props: IMapProps) {
   }, [userParcels])
 
   useEffect(() => {
-    console.log('>> custom parcels changed', customParcels)
+    // console.log('>> custom parcels changed', customParcels)
   }, [customParcels])
 
   return (

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, TextField, Chip, Stack } from '@mui/material'
-import FilterChips from './FilterChips'
 
 const textFieldStyle = {
   color: 'magenta',
@@ -12,6 +11,7 @@ const textFieldStyle = {
   },
   '& .MuiOutlinedInput-root': {
     color: 'magenta',
+    borderRadius: '0px',
     '& fieldset': {
       borderColor: 'magenta',
     },
@@ -101,7 +101,7 @@ function CustomParcelFilter(props: ICustomFilterProps) {
   }
 
   useEffect(() => {
-    console.log('custom parcel chips changed ', customParcels)
+    // console.log('custom parcel chips changed ', customParcels)
   }, [customParcelsChips])
 
   useEffect(() => {
@@ -139,10 +139,14 @@ function CustomParcelFilter(props: ICustomFilterProps) {
             onChange={changeParcelInput}
             onKeyDown={addParcel}
             value={textInput}
+            fullWidth
+            size={'small'}
           />
         </Grid>
         <Grid item xs={12}>
-          <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
+          <Stack
+            sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+          >
             {[...customParcelsChips]}
           </Stack>
         </Grid>
