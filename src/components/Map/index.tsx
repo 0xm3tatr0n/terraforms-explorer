@@ -31,7 +31,7 @@ function Map(props: IMapProps) {
   const [dataToRender, setDataToRender] = useState<any[]>([])
   const [colorDimension, setColorDimension] = useState<string>('none')
   const [colorMap, setColorMap] = useState({} as Record<string, string>)
-  const [spaceSlider, setSpaceSlider] = useState<number>(2)
+  const [spaceSlider, setSpaceSlider] = useState<number>(3)
   const [spaceSliderHorizontal, setSpaceSliderHorizontal] = useState<number>(1)
   const [cameraState, setCameraState] = useState<number[]>([])
 

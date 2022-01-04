@@ -30,7 +30,7 @@ function FilterPanel(props: IFilterPanelProps) {
 
   const updateSpace = (event: Event, newValue: number | number[]) => {
     const space = Number(newValue)
-    if (space >= 0 && space <= 5) {
+    if (space >= 0 && space <= 10) {
       setSpaceSlider(space)
       setTestState(!testState)
     }
@@ -38,7 +38,7 @@ function FilterPanel(props: IFilterPanelProps) {
 
   const updateSpceHozriontal = (event: Event, newValue: number | number[]) => {
     const space = Number(newValue)
-    if (space >= 1 && space <= 10) {
+    if (space >= 0 && space <= 3) {
       setSpaceSliderHorizontal(space)
       setTestState(!testState)
     }
@@ -158,10 +158,10 @@ function FilterPanel(props: IFilterPanelProps) {
               <Slider
                 aria-label="Level Spacing"
                 valueLabelDisplay="auto"
-                step={0.5}
+                step={1}
                 marks
                 min={0.5}
-                max={5}
+                max={10}
                 value={spaceSlider}
                 onChange={updateSpace}
                 color="secondary"
@@ -184,7 +184,7 @@ function FilterPanel(props: IFilterPanelProps) {
                 step={1}
                 marks
                 min={1}
-                max={5}
+                max={3}
                 value={spaceSliderHorizontal}
                 onChange={updateSpceHozriontal}
                 color="secondary"

@@ -52,7 +52,7 @@ function CustomParcelFilter(props: ICustomFilterProps) {
     triggerFn,
   } = props
 
-  const [textInput, setTextInput] = useState<string>('6068')
+  const [textInput, setTextInput] = useState<string>('')
   const [customParcels, setCustomParcels] = useState<number[]>([])
   const [customParcelsChips, setCustomParcelsChips] = useState([])
 
@@ -80,6 +80,7 @@ function CustomParcelFilter(props: ICustomFilterProps) {
         console.log('parcel value', e.target.value)
         const customParcelsNew = [...customParcels, Number(e.target.value)]
         setCustomParcels(customParcelsNew)
+        setTextInput('')
       }
     }
   }
@@ -141,6 +142,8 @@ function CustomParcelFilter(props: ICustomFilterProps) {
             value={textInput}
             fullWidth
             size={'small'}
+            id="parcel-input"
+            placeholder={'enter parcel ID'}
           />
         </Grid>
         <Grid item xs={12}>

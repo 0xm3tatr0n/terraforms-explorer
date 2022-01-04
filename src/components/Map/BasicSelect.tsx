@@ -86,21 +86,28 @@ function BasicSelect(props: IBasicSelectProps) {
           label={label}
           onChange={handleChange}
           sx={{
-            /* border: '1px solid white' */ color: 'magenta',
+            '&:hover': {
+              '&& fieldset': {
+                border: '2px solid magenta',
+              },
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'magenta',
+              color: 'magenta',
+              '&label': {},
+            },
+
+            '&.MuiFormLabel-root Mui-focused ': {
+              color: 'yellow',
+            },
+
+            '& .MuiOutlinedInput-root': {
+              color: 'magenta',
+            },
             '&& > fieldset': {
-              // padding: '2px',
               border: '1px solid magenta',
               borderRadius: '0px',
-              // '&:hover': { border: '1px solid yellow' },
             },
-            '&& > .MuiSelect-select': {
-              // border: '2px solid blue',
-              // padding: '10px',
-            },
-            'MuiOutlinedInput-root ': {
-              color: 'white',
-            },
-            padding: '0px',
             '&& > .MuiSvgIcon-root': {
               color: 'magenta',
             },
