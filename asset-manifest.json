@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/terraforms-explorer/static/css/main.09f45528.css",
-    "main.js": "/terraforms-explorer/static/js/main.48f2d1ba.js",
+    "main.js": "/terraforms-explorer/static/js/main.f08707a8.js",
     "static/js/787.6d45736f.chunk.js": "/terraforms-explorer/static/js/787.6d45736f.chunk.js",
     "index.html": "/terraforms-explorer/index.html",
     "main.09f45528.css.map": "/terraforms-explorer/static/css/main.09f45528.css.map",
-    "main.48f2d1ba.js.map": "/terraforms-explorer/static/js/main.48f2d1ba.js.map",
+    "main.f08707a8.js.map": "/terraforms-explorer/static/js/main.f08707a8.js.map",
     "787.6d45736f.chunk.js.map": "/terraforms-explorer/static/js/787.6d45736f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.09f45528.css",
-    "static/js/main.48f2d1ba.js"
+    "static/js/main.f08707a8.js"
   ]
 }
