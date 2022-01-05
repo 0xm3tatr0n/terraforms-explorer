@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Grid, Slider, Box, Stack, Drawer } from '@mui/material'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
 import { fallbackColor } from './utils/index'
 
 import { IRender3DProps } from './interfaces'
 
 function Render3D(props: IRender3DProps) {
+  // console.log('>> loading Render3D')
   const {
     dataToRender,
     testState,
@@ -25,12 +25,13 @@ function Render3D(props: IRender3DProps) {
   useEffect(() => {
     console.log('init map: ', dataToRender)
     if (!mount || !mount.current) return
+    console.log('>> 3D useEffect triggered (Render3D)')
     let width = mount.current.clientWidth
     let height = mount.current.clientHeight
     let frameId: number | null
 
     const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(18, width / height, 0.1, 1000000)
+    const camera = new THREE.PerspectiveCamera(18, width / height, 0.1, 10000)
 
     if (cameraState.length === 3) {
       camera.position.x = cameraState[0]
@@ -61,15 +62,18 @@ function Render3D(props: IRender3DProps) {
     directionalLight.position.set(40, 80, 50)
     scene.add(directionalLight)
 
-    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8)
-    directionalLight.position.set(50, 80, 50)
-    scene.add(directionalLight2)
+    // const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8)
+    // directionalLight.position.set(50, 80, 50)
+    // scene.add(directionalLight2)
 
     // const helper = new THREE.DirectionalLightHelper(directionalLight, 5)
     // scene.add(helper)
 
     // const helper2 = new THREE.DirectionalLightHelper(directionalLight2, 5)
     // scene.add(helper2)
+
+    // map to reuse materials
+    const materialRecycling: Record<string, any> = {}
 
     // loop over level data
     for (let i = 0; i < dataToRender.length; i++) {
@@ -89,29 +93,65 @@ function Render3D(props: IRender3DProps) {
 
       switch (colorDimension) {
         case 'level':
-          materialColored = new THREE.MeshLambertMaterial({
-            color: fallbackColor(colorMap[level]),
-          })
+          if (materialRecycling[colorMap[level]]) {
+            // console.log(
+            //   '>>> recycling: ',
+            //   colorMap[level],
+            //   materialRecycling[colorMap[level]],
+            // )
+            materialColored = materialRecycling[colorMap[level]]
+          } else {
+            const currentColor = fallbackColor(colorMap[level])
+            materialColored = new THREE.MeshLambertMaterial({
+              color: currentColor,
+            })
+
+            materialRecycling[colorMap[level]] = materialColored
+          }
           break
         case 'biome':
-          materialColored = new THREE.MeshLambertMaterial({
-            color: fallbackColor(colorMap[biome]),
-          })
+          if (materialRecycling[colorMap[biome]]) {
+            materialColored = materialRecycling[colorMap[biome]]
+          } else {
+            const currentColor = fallbackColor(colorMap[biome])
+            materialColored = new THREE.MeshLambertMaterial({
+              color: currentColor,
+            })
+            materialRecycling[colorMap[biome]] = materialColored
+          }
           break
         case 'zone':
-          materialColored = new THREE.MeshLambertMaterial({
-            color: fallbackColor(colorMap[zone]),
-          })
+          if (materialRecycling[colorMap[zone]]) {
+            materialColored = materialRecycling[colorMap[zone]]
+          } else {
+            const currentColor = fallbackColor(colorMap[zone])
+            materialColored = new THREE.MeshLambertMaterial({
+              color: currentColor,
+            })
+            materialRecycling[colorMap[zone]] = materialColored
+          }
           break
         case 'mine':
-          materialColored = new THREE.MeshLambertMaterial({
-            color: fallbackColor(colorMap[id]),
-          })
+          if (materialRecycling[colorMap[id]]) {
+            materialColored = materialRecycling[colorMap[id]]
+          } else {
+            const currentColor = fallbackColor(colorMap[id])
+            materialColored = new THREE.MeshLambertMaterial({
+              color: currentColor,
+            })
+            materialRecycling[colorMap[id]] = materialColored
+          }
           break
         case 'custom':
-          materialColored = new THREE.MeshLambertMaterial({
-            color: fallbackColor(colorMap[id]),
-          })
+          if (materialRecycling[colorMap[id]]) {
+            materialColored = materialRecycling[colorMap[id]]
+          } else {
+            const currentColor = fallbackColor(colorMap[id])
+            materialColored = new THREE.MeshLambertMaterial({
+              color: fallbackColor(colorMap[id]),
+            })
+            materialRecycling[colorMap[id]] = materialColored
+          }
           break
         default:
           materialColored = new THREE.MeshLambertMaterial({
@@ -182,6 +222,11 @@ function Render3D(props: IRender3DProps) {
       scene.remove()
       geometry.dispose()
       material.dispose()
+
+      // disposing of collected materials
+      for (const [key, recycledMaterial] of Object.entries(materialRecycling)) {
+        recycledMaterial.dispose()
+      }
     }
   }, [
     dataToRender,
