@@ -80,7 +80,13 @@ function BasicSelect(props: IBasicSelectProps) {
   return (
     <Box sx={{ marginTop: '5px', marginBottom: '3px' }}>
       <FormControl fullWidth>
-        <InputLabel sx={{ color: 'magenta' }}>{label}</InputLabel>
+        <InputLabel
+          sx={{
+            color: 'magenta',
+          }}
+        >
+          {label}
+        </InputLabel>
         <Select
           value={selection}
           label={label}
@@ -90,8 +96,11 @@ function BasicSelect(props: IBasicSelectProps) {
               '&& fieldset': {
                 border: '2px solid magenta',
               },
+              '&& label': {
+                color: 'magenta',
+              },
             },
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            '&.Mui-focused MuiOutlinedInput-notchedOutline': {
               borderColor: 'magenta',
               color: 'magenta',
               '&label': {},
