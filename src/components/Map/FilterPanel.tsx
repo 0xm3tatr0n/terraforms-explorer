@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Grid, Slider, Box, Stack, Drawer } from '@mui/material'
 import { IFilterPanelProps, IDataFilters } from './interfaces'
 import ColorSelectRadioButtons from './ColorSelectRadioButtons'
+import ColorSelectDropdown from './ColorSelectDropdown'
 import BasicSelect from './BasicSelect'
 import FilterChips from './FilterChips'
 import CustomParcelFilter from './CustomParcelFilter'
@@ -24,6 +25,8 @@ function FilterPanel(props: IFilterPanelProps) {
     spaceSlider,
     parcels,
     setCustomParcels,
+    elevationMultiple,
+    setElevationMultiple,
   } = props
 
   const { levelsFilter, biomesFilter, zonesFilter } = dataFilters
@@ -40,6 +43,17 @@ function FilterPanel(props: IFilterPanelProps) {
     const space = Number(newValue)
     if (space >= 0 && space <= 3) {
       setSpaceSliderHorizontal(space)
+      setTestState(!testState)
+    }
+  }
+
+  const updateElevationMultiple = (
+    event: Event,
+    newValue: number | number[],
+  ) => {
+    const space = Number(newValue)
+    if (space >= 0 && space <= 5) {
+      setElevationMultiple(space)
       setTestState(!testState)
     }
   }
@@ -92,16 +106,18 @@ function FilterPanel(props: IFilterPanelProps) {
           <i>Color by</i>
         </Grid>
         <Grid item xs={12}>
-          <ColorSelectRadioButtons
+          <ColorSelectDropdown
             callback={setColorDimension}
             dimension={colorDimension}
           />
         </Grid>
-        <CustomParcelFilter
-          setCustomParcels={setCustomParcels}
-          triggerVar={testState}
-          triggerFn={setTestState}
-        />
+        {colorDimension === 'custom' && (
+          <CustomParcelFilter
+            setCustomParcels={setCustomParcels}
+            triggerVar={testState}
+            triggerFn={setTestState}
+          />
+        )}
         <Grid item xs={12}>
           <i>Filters</i>
         </Grid>
@@ -187,6 +203,28 @@ function FilterPanel(props: IFilterPanelProps) {
                 max={3}
                 value={spaceSliderHorizontal}
                 onChange={updateSpceHozriontal}
+                color="secondary"
+                sx={{
+                  display: 'inline-block',
+                  marginLeft: '15px',
+                }}
+              />
+            </Stack>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box>
+            <Stack>
+              <Box>Elevation multiplier</Box>
+              <Slider
+                aria-label="Level Spacing"
+                valueLabelDisplay="auto"
+                step={1}
+                marks
+                min={1}
+                max={5}
+                value={elevationMultiple}
+                onChange={updateElevationMultiple}
                 color="secondary"
                 sx={{
                   display: 'inline-block',

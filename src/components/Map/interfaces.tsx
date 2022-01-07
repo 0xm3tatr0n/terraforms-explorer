@@ -47,6 +47,8 @@ export interface IFilterPanelProps {
   setSpaceSliderHorizontal: any
   parcels: number[]
   setCustomParcels: any
+  elevationMultiple: number
+  setElevationMultiple: any
 }
 
 export interface IRender3DProps {
@@ -59,4 +61,5 @@ export interface IRender3DProps {
   spaceSlider: number
   spaceSliderHorizontal: number
   customParcels: number[]
+  elevationMultiple: number
 }

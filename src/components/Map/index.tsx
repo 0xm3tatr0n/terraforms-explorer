@@ -29,10 +29,11 @@ function Map(props: IMapProps) {
     levelsFilter: [],
   })
   const [dataToRender, setDataToRender] = useState<any[]>([])
-  const [colorDimension, setColorDimension] = useState<string>('none')
+  const [colorDimension, setColorDimension] = useState<string>('level')
   const [colorMap, setColorMap] = useState({} as Record<string, string>)
-  const [spaceSlider, setSpaceSlider] = useState<number>(3)
+  const [spaceSlider, setSpaceSlider] = useState<number>(4)
   const [spaceSliderHorizontal, setSpaceSliderHorizontal] = useState<number>(1)
+  const [elevationMultiple, setElevationMultiple] = useState<number>(1)
   const [cameraState, setCameraState] = useState<number[]>([])
 
   // todo remove (works as hack to update chip component)
@@ -98,6 +99,8 @@ function Map(props: IMapProps) {
           spaceSliderHorizontal={spaceSliderHorizontal}
           parcels={parcels}
           setCustomParcels={setCustomParcels}
+          elevationMultiple={elevationMultiple}
+          setElevationMultiple={setElevationMultiple}
         />
         <Render3D
           dataToRender={dataToRender}
@@ -109,6 +112,7 @@ function Map(props: IMapProps) {
           spaceSlider={spaceSlider}
           spaceSliderHorizontal={spaceSliderHorizontal}
           customParcels={customParcels}
+          elevationMultiple={elevationMultiple}
         />
       </Grid>
     </Grid>

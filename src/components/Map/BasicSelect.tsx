@@ -92,6 +92,7 @@ function BasicSelect(props: IBasicSelectProps) {
           label={label}
           onChange={handleChange}
           sx={{
+            color: 'magenta',
             '&:hover': {
               '&& fieldset': {
                 border: '2px solid magenta',

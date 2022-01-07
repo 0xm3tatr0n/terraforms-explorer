@@ -18,6 +18,7 @@ function Render3D(props: IRender3DProps) {
     spaceSlider,
     spaceSliderHorizontal,
     customParcels,
+    elevationMultiple,
   } = props
 
   const mount = useRef<HTMLDivElement>(null)
@@ -94,11 +95,6 @@ function Render3D(props: IRender3DProps) {
       switch (colorDimension) {
         case 'level':
           if (materialRecycling[colorMap[level]]) {
-            // console.log(
-            //   '>>> recycling: ',
-            //   colorMap[level],
-            //   materialRecycling[colorMap[level]],
-            // )
             materialColored = materialRecycling[colorMap[level]]
           } else {
             const currentColor = fallbackColor(colorMap[level])
@@ -148,7 +144,7 @@ function Render3D(props: IRender3DProps) {
           } else {
             const currentColor = fallbackColor(colorMap[id])
             materialColored = new THREE.MeshLambertMaterial({
-              color: fallbackColor(colorMap[id]),
+              color: currentColor,
             })
             materialRecycling[colorMap[id]] = materialColored
           }
@@ -160,7 +156,11 @@ function Render3D(props: IRender3DProps) {
           break
       }
 
-      const geometry = new THREE.BoxBufferGeometry(1, elevation, 1)
+      const geometry = new THREE.BoxBufferGeometry(
+        1,
+        elevation * elevationMultiple,
+        1,
+      )
 
       const plot = new THREE.Mesh(geometry, materialColored)
       plot.position.set(
@@ -236,6 +236,7 @@ function Render3D(props: IRender3DProps) {
     spaceSliderHorizontal,
     testState,
     customParcels,
+    elevationMultiple,
   ])
 
   return (
