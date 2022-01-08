@@ -38,6 +38,14 @@ function BasicSelect(props: IBasicSelectProps) {
       if (filters.levelsFilter.length === 0) {
         setSelection('all')
       }
+    } else if (property === 'Chroma') {
+      if (filters.chromasFilter.length === 0) {
+        setSelection('all')
+      }
+    } else if (property === 'Mode') {
+      if (filters.modesFilter.length === 0) {
+        setSelection('all')
+      }
     }
   }, [filters, property, triggerVar])
 
@@ -68,6 +76,18 @@ function BasicSelect(props: IBasicSelectProps) {
         newFilter.levelsFilter = []
       } else {
         newFilter.levelsFilter.push(Number(e.target.value) as number)
+      }
+    } else if (property === 'Chroma') {
+      if (e.target.value === 'all') {
+        newFilter.chromasFilter = []
+      } else {
+        newFilter.chromasFilter.push(String(e.target.value) as string)
+      }
+    } else if (property === 'Mode') {
+      if (e.target.value === 'all') {
+        newFilter.modesFilter = []
+      } else {
+        newFilter.modesFilter.push(String(e.target.value) as string)
       }
     }
     console.log('setting new data filter to ', newFilter)

@@ -88,6 +88,8 @@ function Render3D(props: IRender3DProps) {
         biome,
         zoneName: zone,
         elevation,
+        chroma,
+        mode,
       } = block
 
       let materialColored
@@ -147,6 +149,28 @@ function Render3D(props: IRender3DProps) {
               color: currentColor,
             })
             materialRecycling[colorMap[id]] = materialColored
+          }
+          break
+        case 'chroma':
+          if (materialRecycling[colorMap[chroma]]) {
+            materialColored = materialRecycling[colorMap[chroma]]
+          } else {
+            const currentColor = fallbackColor(colorMap[chroma])
+            materialColored = new THREE.MeshLambertMaterial({
+              color: currentColor,
+            })
+            materialRecycling[colorMap[chroma]] = materialColored
+          }
+          break
+        case 'mode':
+          if (materialRecycling[colorMap[mode]]) {
+            materialColored = materialRecycling[colorMap[mode]]
+          } else {
+            const currentColor = fallbackColor(colorMap[mode])
+            materialColored = new THREE.MeshLambertMaterial({
+              color: currentColor,
+            })
+            materialRecycling[colorMap[mode]] = materialColored
           }
           break
         default:

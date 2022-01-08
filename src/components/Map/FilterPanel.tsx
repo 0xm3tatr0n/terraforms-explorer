@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Grid, Slider, Box, Stack, Drawer } from '@mui/material'
+import { Grid, Slider, Box, Stack, Drawer, Card } from '@mui/material'
 import { IFilterPanelProps, IDataFilters } from './interfaces'
 import ColorSelectRadioButtons from './ColorSelectRadioButtons'
 import ColorSelectDropdown from './ColorSelectDropdown'
@@ -15,6 +15,8 @@ function FilterPanel(props: IFilterPanelProps) {
     levelsAll,
     zonesAll,
     biomesAll,
+    chromasAll,
+    modesAll,
     filterSelection,
     setDataFilters,
     setTestState,
@@ -93,6 +95,18 @@ function FilterPanel(props: IFilterPanelProps) {
         value,
       ) as string[]
       newFilters.zonesFilter = clearedArray
+    } else if (dimension === 'Chroma') {
+      const clearedArray = removeElement(
+        dataFilters.chromasFilter,
+        value,
+      ) as string[]
+      newFilters.chromasFilter = clearedArray
+    } else if (dimension === 'Mode') {
+      const clearedArray = removeElement(
+        dataFilters.modesFilter,
+        value,
+      ) as string[]
+      newFilters.modesFilter = clearedArray
     }
 
     setTestState(!testState)
@@ -118,6 +132,7 @@ function FilterPanel(props: IFilterPanelProps) {
             triggerFn={setTestState}
           />
         )}
+
         <Grid item xs={12}>
           <i>Filters</i>
         </Grid>
@@ -157,6 +172,30 @@ function FilterPanel(props: IFilterPanelProps) {
             triggerFn={setTestState}
           />
         </Grid>
+        <Grid item xs={12}>
+          <BasicSelect
+            label={'Chroma'}
+            options={chromasAll}
+            callback={filterSelection('Chroma', dataFilters, setDataFilters)}
+            filters={dataFilters}
+            property={'Chroma'}
+            triggerVar={testState}
+            setDataFilters={setDataFilters}
+            triggerFn={setTestState}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <BasicSelect
+            label={'Mode'}
+            options={modesAll}
+            callback={filterSelection('Mode', dataFilters, setDataFilters)}
+            filters={dataFilters}
+            property={'Mode'}
+            triggerVar={testState}
+            setDataFilters={setDataFilters}
+            triggerFn={setTestState}
+          />
+        </Grid>
         <Grid item xs={12} sx={{ display: 'flex' }}>
           <FilterChips
             activeFilters={dataFilters}
@@ -164,6 +203,7 @@ function FilterPanel(props: IFilterPanelProps) {
             triggerVar={testState}
           />
         </Grid>
+
         <Grid item xs={12}>
           <i>Explode</i>
         </Grid>

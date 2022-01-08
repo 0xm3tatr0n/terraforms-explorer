@@ -1,3 +1,5 @@
+import { color } from 'd3'
+
 export default function generateColorMap(
   colorDimension: string,
   levelsAll: number[],
@@ -7,6 +9,8 @@ export default function generateColorMap(
   parcels: number[],
   colorPallette: string[],
   customParcels: number[],
+  chromaAll: string[],
+  modesAll: string[],
 ) {
   const newColorMap: Record<string, string> = {}
   if (colorDimension === 'none') {
@@ -42,6 +46,16 @@ export default function generateColorMap(
       newColorMap[String(e)] = customParcels.includes(Number(e))
         ? '#ff00ff'
         : '#FFFFFF'
+    })
+  } else if (colorDimension === 'chroma') {
+    console.log('>>> chroma color', chromaAll)
+    chromaAll.forEach((e, i) => {
+      console.log(' >>> chroma', e, 'color', colorPallette[i])
+      newColorMap[String(e)] = colorPallette[i]
+    })
+  } else if (colorDimension === 'mode') {
+    modesAll.forEach((e, i) => {
+      newColorMap[String(e)] = colorPallette[i]
     })
   }
   return newColorMap

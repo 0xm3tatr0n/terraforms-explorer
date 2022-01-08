@@ -24,6 +24,18 @@ const filterSelection = (
     } else {
       newFilter.zonesFilter = [String(value)]
     }
+  } else if (dimension === 'Chroma') {
+    if (value[0] === 'all' || value === 'all') {
+      newFilter.chromasFilter = []
+    } else {
+      newFilter.chromasFilter = [String(value)]
+    }
+  } else if (dimension === 'Mode') {
+    if (value[0] === 'all' || value === 'all') {
+      newFilter.modesFilter = []
+    } else {
+      newFilter.modesFilter = [String(value)]
+    }
   }
 
   if (callback) {

@@ -21,12 +21,16 @@ function Map(props: IMapProps) {
   const [levelsAll, setLevelsAll] = useState<number[]>([])
   const [zonesAll, setZonesAll] = useState<string[]>([])
   const [biomesAll, setBiomesAll] = useState<number[]>([])
+  const [chromasAll, setChromasAll] = useState<string[]>([])
+  const [modesAll, setModesAll] = useState<string[]>([])
   const [customParcels, setCustomParcels] = useState<number[]>([])
   const [dataAll, setDataAll] = useState<any[]>([])
   const [dataFilters, setDataFilters] = useState<IDataFilters>({
     zonesFilter: [],
     biomesFilter: [],
     levelsFilter: [],
+    chromasFilter: [],
+    modesFilter: [],
   })
   const [dataToRender, setDataToRender] = useState<any[]>([])
   const [colorDimension, setColorDimension] = useState<string>('level')
@@ -42,13 +46,17 @@ function Map(props: IMapProps) {
   // methods
   // effects
   useEffect(() => {
-    const { data, levels, biomes, zones, ids } = loadData(dataRaw)
+    const { data, levels, biomes, zones, ids, chromas, modes } = loadData(
+      dataRaw,
+    )
     setIdsAll(ids)
     setLevelsAll(levels)
     setBiomesAll(biomes)
     setZonesAll(zones)
     setDataAll(data)
     setDataToRender(data)
+    setChromasAll(chromas)
+    setModesAll(modes)
   }, [])
 
   useEffect(() => {
@@ -66,6 +74,8 @@ function Map(props: IMapProps) {
       parcels,
       colorPallette,
       customParcels,
+      chromasAll,
+      modesAll,
     )
 
     setColorMap(newColorMap)
@@ -101,6 +111,8 @@ function Map(props: IMapProps) {
           setCustomParcels={setCustomParcels}
           elevationMultiple={elevationMultiple}
           setElevationMultiple={setElevationMultiple}
+          chromasAll={chromasAll}
+          modesAll={modesAll}
         />
         <Render3D
           dataToRender={dataToRender}

@@ -81,6 +81,8 @@ function ColorSelectDropdown(props: IColorRadioProps) {
         <MenuItem value={'mine'}>Mine</MenuItem>
         <MenuItem value={'custom'}>Custom</MenuItem>
         <MenuItem value={'none'}>None</MenuItem>
+        <MenuItem value={'chroma'}>Chroma</MenuItem>
+        <MenuItem value={'mode'}>Mode</MenuItem>
       </Select>
     </FormControl>
   )

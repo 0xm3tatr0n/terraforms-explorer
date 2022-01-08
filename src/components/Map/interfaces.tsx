@@ -11,6 +11,8 @@ export interface IDataFilters {
   zonesFilter: string[]
   biomesFilter: number[]
   levelsFilter: number[]
+  chromasFilter: string[]
+  modesFilter: string[]
 }
 
 export interface IBasicSelectProps {
@@ -49,6 +51,8 @@ export interface IFilterPanelProps {
   setCustomParcels: any
   elevationMultiple: number
   setElevationMultiple: any
+  chromasAll: string[]
+  modesAll: string[]
 }
 
 export interface IRender3DProps {

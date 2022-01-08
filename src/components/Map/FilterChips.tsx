@@ -18,7 +18,13 @@ const styleChip = {
 function FilterChips(props: IChipsProps) {
   const { activeFilters, removeChip, triggerVar } = props
 
-  const { levelsFilter, zonesFilter, biomesFilter } = activeFilters
+  const {
+    levelsFilter,
+    zonesFilter,
+    biomesFilter,
+    chromasFilter,
+    modesFilter,
+  } = activeFilters
 
   const [chipsList, setChipsList] = useState([])
 
@@ -60,6 +66,28 @@ function FilterChips(props: IChipsProps) {
           label={`Zone: ${e}`}
           variant="outlined"
           onDelete={handleDelete('Zones', e)}
+          sx={styleChip}
+          key={`z-${e}`}
+        />,
+      )
+    })
+    chromasFilter.forEach((e) => {
+      chips.push(
+        <Chip
+          label={`Chroma: ${e}`}
+          variant="outlined"
+          onDelete={handleDelete('Chroma', e)}
+          sx={styleChip}
+          key={`z-${e}`}
+        />,
+      )
+    })
+    modesFilter.forEach((e) => {
+      chips.push(
+        <Chip
+          label={`Mode: ${e}`}
+          variant="outlined"
+          onDelete={handleDelete('Mode', e)}
           sx={styleChip}
           key={`z-${e}`}
         />,
