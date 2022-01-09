@@ -48,6 +48,18 @@ function Render3D(props: IRender3DProps) {
     const geometry = new THREE.BoxBufferGeometry(1, 0.5, 1)
     const material = new THREE.MeshLambertMaterial({ color: 0xff00ff })
 
+    // making elements clickable
+    const raycaster = new THREE.Raycaster()
+    const mouse = new THREE.Vector2()
+    function onMouseMove(event: Event) {
+      // calculate mouse position in normalized device coordinates
+      // (-1 to +1) for both components
+      // @ts-ignore
+      mouse.x = 2 * (event.clientX / containerWidth) - 1 // (event.clientX / window.innerWidth) * 2 - 1
+      // @ts-ignore
+      mouse.y = 1 - 2 * (event.clientY / containerHeight) //-(event.clientY / window.innerHeight) * 2 + 1
+    }
+    raycaster.setFromCamera(mouse, camera)
     // add color to edges of material
 
     // add axes helper
@@ -209,11 +221,29 @@ function Render3D(props: IRender3DProps) {
       renderer.setSize(width, height)
       camera.aspect = width / height
       camera.updateProjectionMatrix()
+      render()
+    }
+
+    function render() {
+      // @ts-ignore
+      width = mount.current.clientWidth
+      // @ts-ignore
+      height = mount.current.clientHeight
+      const intersects = raycaster.intersectObjects(scene.children)
+
+      raycaster.setFromCamera(mouse, camera)
+      // calculate objects intersecting the picking ray var intersects =
+      raycaster.intersectObjects(scene.children)
+      for (var i = 0; i < intersects.length; i++) {
+        console.log('intersection ', intersects, i, intersects[i])
+        // @ts-ignore
+        intersects[i].object.material.color.set(0xffffff)
+      }
       renderer.render(scene, camera)
     }
 
     const animate = () => {
-      renderer.render(scene, camera)
+      render()
       frameId = window.requestAnimationFrame(animate)
     }
 
@@ -231,6 +261,7 @@ function Render3D(props: IRender3DProps) {
 
     mount.current.appendChild(renderer.domElement)
     window.addEventListener('resize', handleResize)
+    window.addEventListener('mousemove', onMouseMove, false)
     start()
 
     // @ts-ignore
