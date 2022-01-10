@@ -185,6 +185,13 @@ function Render3D(props: IRender3DProps) {
             materialRecycling[colorMap[mode]] = materialColored
           }
           break
+
+        case 'indivudual':
+          const currentColor = fallbackColor('#00FFFF')
+          materialColored = new THREE.MeshLambertMaterial({
+            color: currentColor,
+          })
+          break
         default:
           materialColored = new THREE.MeshLambertMaterial({
             color: '#ff00ff',
