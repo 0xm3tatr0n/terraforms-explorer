@@ -58,7 +58,6 @@ function Neighbourhood(props: INeighbourhoodProps) {
                 <Grid item xs={6} md={3} lg={3}>
                   <TerraformsCard tokenId={e} contract={contract} />
                 </Grid>
-                // <div>foo</div>
               )
             })
           ) : (
