@@ -49,13 +49,13 @@ function Neighbourhood(props: INeighbourhoodProps) {
 
   return (
     <Grid item xs={12}>
-      <Grid container spacing={2}>
+      <Grid container spacing={0}>
         <>
           {hood.length > 0 ? (
             hood.map(function (e) {
               console.log('mapping hood: ', e)
               return (
-                <Grid item xs={6} md={3} lg={2} xl={2}>
+                <Grid item xs={6} md={3} lg={3}>
                   <TerraformsCard tokenId={e} contract={contract} />
                 </Grid>
                 // <div>foo</div>

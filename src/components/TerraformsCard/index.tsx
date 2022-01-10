@@ -6,7 +6,9 @@ import { TerraformsMetaDataPlaceholder } from './placeholders'
 
 async function getHTML(terraforms: any, token: number, setTerraformsSVG: any) {
   if (terraforms) {
-    const HTML = await terraforms.tokenSVG(token)
+    const HTML = await terraforms.tokenHTML(token)
+    const SVG = await terraforms.tokenSVG(token)
+    console.log('>>> got HTML: ', HTML)
     setTerraformsSVG(HTML)
   }
 }
@@ -60,8 +62,16 @@ function RenderTerraform(props: RenderTerraformsProps) {
 
   if (terraHTML) {
     return (
-      <div>
-        <div dangerouslySetInnerHTML={{ __html: terraHTML }}></div>
+      <div
+        style={{
+          aspectRatio: '2 / 3',
+        }}
+      >
+        <iframe
+          style={{ width: '100%', height: '100%', border: 'none' }}
+          srcDoc={terraHTML}
+          sandbox=""
+        />
       </div>
     )
   } else {
@@ -86,15 +96,7 @@ function RenderTerraformsCard(props: RenderTerraformsProps) {
   }, [tokenId, contract])
 
   return (
-    <Grid container spacing={2} onClick={toggleCard}>
-      <Grid item xs={12}>
-        {tokenId} | {terraMetadata.zoneName}
-      </Grid>
-      <Grid item xs={12}>
-        Level {terraMetadata.level} at {'{'} {terraMetadata.xCoordinate},{' '}
-        {terraMetadata.yCoordinate} {'}'}
-      </Grid>
-
+    <Grid container spacing={0} onClick={toggleCard}>
       {showFront ? (
         <Grid item xs={12}>
           <RenderTerraform tokenId={tokenId} contract={contract} />
@@ -102,6 +104,13 @@ function RenderTerraformsCard(props: RenderTerraformsProps) {
       ) : (
         <Grid item xs={12}>
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              {tokenId} | {terraMetadata.zoneName}
+            </Grid>
+            <Grid item xs={12}>
+              Level {terraMetadata.level} at {'{'} {terraMetadata.xCoordinate},{' '}
+              {terraMetadata.yCoordinate} {'}'}
+            </Grid>
             <Grid item xs={12}>
               Zone: {terraMetadata.zoneName}
             </Grid>
