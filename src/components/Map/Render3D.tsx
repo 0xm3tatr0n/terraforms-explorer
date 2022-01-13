@@ -22,6 +22,8 @@ function Render3D(props: IRender3DProps) {
   } = props
 
   const mount = useRef<HTMLDivElement>(null)
+  const mouseRef = useRef(new THREE.Vector2())
+  console.log('mouse ref: ', mouseRef.current)
 
   useEffect(() => {
     console.log('init map: ', dataToRender)
@@ -50,16 +52,23 @@ function Render3D(props: IRender3DProps) {
 
     // making elements clickable
     const raycaster = new THREE.Raycaster()
-    const mouse = new THREE.Vector2()
+    // const mouse = new THREE.Vector2()
     function onMouseMove(event: Event) {
+      console.log('mouse moving!')
       // calculate mouse position in normalized device coordinates
       // (-1 to +1) for both components
       // @ts-ignore
       mouse.x = 2 * (event.clientX / containerWidth) - 1 // (event.clientX / window.innerWidth) * 2 - 1
       // @ts-ignore
       mouse.y = 1 - 2 * (event.clientY / containerHeight) //-(event.clientY / window.innerHeight) * 2 + 1
+
+      // @ts-ignore
+      mouseRef.current.x = 2 * (event.clientX / containerWidth) - 1
+      // @ts-ignore
+      mouseRef.current.y = 1 - 2 * (event.clientY / containerHeight)
+      console.log('>>> mouse ref current: ', mouseRef.current)
     }
-    raycaster.setFromCamera(mouse, camera)
+    // raycaster.setFromCamera(mouse, camera)
     // add color to edges of material
 
     // add axes helper
@@ -186,7 +195,7 @@ function Render3D(props: IRender3DProps) {
           }
           break
 
-        case 'indivudual':
+        case 'individual':
           const currentColor = fallbackColor('#00FFFF')
           materialColored = new THREE.MeshLambertMaterial({
             color: currentColor,
@@ -236,15 +245,19 @@ function Render3D(props: IRender3DProps) {
       width = mount.current.clientWidth
       // @ts-ignore
       height = mount.current.clientHeight
-      const intersects = raycaster.intersectObjects(scene.children)
 
-      raycaster.setFromCamera(mouse, camera)
-      // calculate objects intersecting the picking ray var intersects =
-      raycaster.intersectObjects(scene.children)
-      for (var i = 0; i < intersects.length; i++) {
-        console.log('intersection ', intersects, i, intersects[i])
-        // @ts-ignore
-        intersects[i].object.material.color.set(0xffffff)
+      // only highlight intersections in 'inidvidual' coloring mode
+      if (colorDimension === 'individual') {
+        const intersects = raycaster.intersectObjects(scene.children)
+
+        raycaster.setFromCamera(mouseRef.current, camera)
+        // calculate objects intersecting the picking ray var intersects =
+        raycaster.intersectObjects(scene.children)
+        for (var i = 0; i < intersects.length; i++) {
+          // console.log('intersection ', intersects, i, intersects[i])
+          // @ts-ignore
+          intersects[i].object.material.color.set(0xffffff)
+        }
       }
       renderer.render(scene, camera)
     }
@@ -268,7 +281,7 @@ function Render3D(props: IRender3DProps) {
 
     mount.current.appendChild(renderer.domElement)
     window.addEventListener('resize', handleResize)
-    window.addEventListener('mousemove', onMouseMove, false)
+    window.addEventListener('onmouseover', onMouseMove, false)
     start()
 
     // @ts-ignore

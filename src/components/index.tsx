@@ -4,6 +4,7 @@ import Mine from './Mine'
 import Neighbourhood from './Neighbourhood'
 import TerraformsCard from './TerraformsCard'
 import Map from './Map'
+import Parcel from './Parcel'
 
 // interfaces
 import {
@@ -14,4 +15,4 @@ import {
 import { INeighbourhoodProps } from './Neighbourhood/interfaces'
 
 export type { TerraformsMetaData, RenderTerraformsProps, INeighbourhoodProps }
-export { Lookup, Mine, Neighbourhood, TerraformsCard, Map }
+export { Lookup, Mine, Neighbourhood, TerraformsCard, Map, Parcel }

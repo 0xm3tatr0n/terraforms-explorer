@@ -12,7 +12,7 @@ import terraformsABI from './contractABIs/Terraforms.json'
 import './App.css'
 
 import { terraformsAddress, zeroAddress } from './constants'
-import { Lookup, Mine, Neighbourhood, Map } from './components'
+import { Lookup, Mine, Neighbourhood, Map, Parcel } from './components'
 
 async function initWeb3(
   setProvider: any,
@@ -151,21 +151,6 @@ function App() {
               </Typography>
             </Box>
           </Grid>
-          {/* <Grid item xs={12}>
-            <Input
-              style={{
-                color: 'white',
-                border: '1px solid white',
-                padding: '10px',
-              }}
-              onChange={tokenIdInput}
-              value={inputTokenId}
-              onKeyDown={changeTokenId}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            Your castles: {userCastles.join(', ')}
-          </Grid> */}
           <Routes>
             <Route
               path={'/mine'}
@@ -179,6 +164,10 @@ function App() {
               }
             />
             <Route path={'/map'} element={<Map userParcels={userCastles} />} />
+            <Route
+              path={'/parcel'}
+              element={<Parcel contract={terraforms} />}
+            />
             <Route path={'/'} element={<Navigate to="/map" />} />
           </Routes>
         </Grid>
